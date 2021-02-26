@@ -10,9 +10,9 @@ Type 'quit' to exit at anytime. Press 'Enter' to continue
 	 * Type 'quit' to exit
 `
 
-	MsgSelectObject = `Select 1) Users or 2) Tickets or 3) Organizations`
-	MsgSearchTerm   = `Enter search term`
-	MsgSearchValue  = `Enter search value`
+	MsgSelectItem  = `Select 1) Users or 2) Tickets or 3) Organizations`
+	MsgSearchField = `Enter search term`
+	MsgSearchValue = `Enter search value`
 )
 
 const (
@@ -26,3 +26,5 @@ const (
 	ItemTickets       = 2
 	ItemOrganizations = 3
 )
+
+const SearchNoResult = "No results found"

@@ -3,6 +3,7 @@ package utils
 import (
 	"bufio"
 	"os"
+	"strings"
 )
 
 func GetConsoleInput() (string, error) {
@@ -11,6 +12,7 @@ func GetConsoleInput() (string, error) {
 	if err != nil {
 		return "", err
 	}
+	input = strings.TrimSpace(input)
 	return input, nil
 	//scanner := bufio.NewScanner(os.Stdin)
 	//for scanner.Scan() {
