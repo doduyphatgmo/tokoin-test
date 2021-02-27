@@ -14,7 +14,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error has occurred: %v\n", err)
 	}
-	err = searchmod.SearchOption(inputOptionStr)
+	err = searchmod.ExecuteSearchOption(inputOptionStr)
 	if err != nil {
 		fmt.Printf("Error has occurred: %v\n", err)
 	}

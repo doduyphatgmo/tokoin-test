@@ -9,9 +9,9 @@ import (
 )
 
 type resultOrg struct {
-	Org     models.Organization `json:"org"`
-	Users   []models.User       `json:"users"`
-	Tickets []models.Ticket     `json:"tickets"`
+	Org        models.Organization `json:"org"`
+	UserList   []models.User       `json:"user_list"`
+	TicketList []models.Ticket     `json:"ticket_list"`
 }
 
 var orgList []models.Organization
@@ -31,7 +31,7 @@ func mapOrgData() {
 	}
 }
 
-func searchOrg(searchEntry meta.SearchEntry) (resultOrgList []resultOrg, err error) {
+func searchOrg(searchEntry meta.SearchEntry) ([]resultOrg, error) {
 	var orgList []models.Organization
 	switch searchEntry.Field {
 	case models.OrgFieldID:
@@ -44,11 +44,18 @@ func searchOrg(searchEntry meta.SearchEntry) (resultOrgList []resultOrg, err err
 		}
 		break
 	}
-	for _,org := range orgList {
-		var resultOrg resultOrg
+	resultOrgList := transformOrgList(orgList)
+	return resultOrgList, nil
+}
+
+func transformOrgList(orgList []models.Organization) []resultOrg {
+	var resultOrgList []resultOrg
+	var resultOrg resultOrg
+	for _, org := range orgList {
 		resultOrg.Org = org
-		resultOrg.Users = userByOrgIdMap[org.ID]
+		resultOrg.UserList = userByOrgIdMap[org.ID]
+		resultOrg.TicketList = ticketByOrgIdMap[org.ID]
 		resultOrgList = append(resultOrgList, resultOrg)
 	}
-	return resultOrgList, nil
+	return resultOrgList
 }

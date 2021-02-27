@@ -9,7 +9,7 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/lib/utils"
 )
 
-func SearchOption(optionStr string) error {
+func ExecuteSearchOption(optionStr string) error {
 	if optionStr == meta.OptionQuit {
 		return errors.New("stoppppppp")
 	}

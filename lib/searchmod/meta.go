@@ -9,4 +9,5 @@ const (
 func init() {
 	initOrgList()
 	initUserList()
+	initTicketList()
 }

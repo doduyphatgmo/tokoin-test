@@ -19,9 +19,7 @@ func initUserList() {
 }
 
 func mapUserData()  {
-	var userByOrgIdMap = make(map[uint64][]models.User)
 	for _, user := range userList {
 		userByOrgIdMap[user.OrgID] = append(userByOrgIdMap[user.OrgID], user)
 	}
-	fmt.Println(userByOrgIdMap)
 }
