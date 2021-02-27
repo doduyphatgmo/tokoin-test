@@ -7,5 +7,6 @@ const (
 )
 
 func init() {
-	initOrganizationList()
+	initOrgList()
+	initUserList()
 }
