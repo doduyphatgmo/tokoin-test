@@ -9,14 +9,20 @@ import (
 )
 
 func main() {
-	fmt.Print(meta.MsgSearchOptions)
-	inputOptionStr, err := utils.GetConsoleInput()
-	if err != nil {
-		fmt.Printf("Error has occurred: %v\n", err)
-	}
-	err = searchmod.ExecuteSearchOption(inputOptionStr)
-	if err != nil {
-		fmt.Printf("Error has occurred: %v\n", err)
+	for {
+		fmt.Print(meta.MsgSearchOptions)
+		selectedOptionStr, err := utils.GetConsoleInput()
+		if err != nil {
+			fmt.Printf("Error has occurred: %v\n", err)
+		}
+		if selectedOptionStr == meta.OptionQuit {
+			fmt.Println("stoppppppp")
+			break
+		}
+		err = searchmod.ExecuteSelectedOption(selectedOptionStr)
+		if err != nil {
+			fmt.Printf("Error just occurred: %v. Please try again\n", err)
+		}
 	}
 }
 

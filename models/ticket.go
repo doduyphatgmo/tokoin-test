@@ -1,7 +1,7 @@
 package models
 
 type Ticket struct {
-	ID           uint64   `json:"_id"`
+	ID           string   `json:"_id"`
 	URL          string   `json:"url"`
 	ExternalID   string   `json:"external_id"`
 	CreatedAt    string   `json:"created_at"`

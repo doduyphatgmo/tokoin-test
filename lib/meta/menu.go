@@ -28,3 +28,5 @@ const (
 )
 
 const SearchNoResult = "No results found"
+
+const DisplaySpaceLength = 50

@@ -9,10 +9,7 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/lib/utils"
 )
 
-func ExecuteSearchOption(optionStr string) error {
-	if optionStr == meta.OptionQuit {
-		return errors.New("stoppppppp")
-	}
+func ExecuteSelectedOption(optionStr string) error {
 	option, err := strconv.Atoi(optionStr)
 	if err != nil {
 		return err
@@ -20,10 +17,15 @@ func ExecuteSearchOption(optionStr string) error {
 	switch option {
 	case meta.OptionSearch:
 		err = executeOptionSearch()
+		if err != nil {
+			return err
+		}
 		break
 	case meta.OptionViewFields:
 		//viewListFields()
 		break
+	default:
+		return errors.New("wrong option. try again")
 	}
 	return nil
 }
@@ -46,11 +48,11 @@ func executeOptionSearch() error {
 
 	switch inputItem {
 	case meta.ItemOrganizations:
-		orgList, err := searchOrg(searchEntry)
+		orgResultList, err := searchOrg(searchEntry)
 		if err != nil {
 			return err
 		}
-		printOrgResult(orgList)
+		printOrgResult(orgResultList)
 		break
 	//case meta.ItemUsers:
 	//	searchEntry, err := GetSearchEntry()

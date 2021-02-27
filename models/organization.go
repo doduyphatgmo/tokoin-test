@@ -23,3 +23,15 @@ const (
 	OrgFieldSharedTickets = "shared_tickets"
 	OrgFieldTags          = "tags"
 )
+
+var SearchableOrgFieldsMap = map[string]bool{
+	OrgFieldID:            true,
+	OrgFieldURL:           true,
+	OrgFieldExternalID:    true,
+	OrgFieldName:          true,
+	OrgFieldDomainNames:   true,
+	OrgFieldCreatedAt:     true,
+	OrgFieldDetails:       true,
+	OrgFieldSharedTickets: true,
+	OrgFieldTags:          true,
+}
