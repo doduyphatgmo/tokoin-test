@@ -4,9 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/doduyphatgmo/tokoin-test/lib/meta"
 	"github.com/doduyphatgmo/tokoin-test/lib/utils"
+	"github.com/doduyphatgmo/tokoin-test/models"
 )
 
 func ExecuteSelectedOption(optionStr string) error {
@@ -79,5 +81,21 @@ func executeOptionSearch() error {
 }
 
 func viewSearchableFields() {
+	fmt.Println(strings.Repeat("-", meta.DisplaySpaceLength))
+	fmt.Println("Search Users with")
+	printSearchableFields(models.SearchableUserFieldsMap)
 
+	fmt.Println(strings.Repeat("-", meta.DisplaySpaceLength))
+	fmt.Println("Search Tickets with")
+	printSearchableFields(models.SearchableTicketFieldsMap)
+
+	fmt.Println(strings.Repeat("-", meta.DisplaySpaceLength))
+	fmt.Println("Search Orgs with")
+	printSearchableFields(models.SearchableOrgFieldsMap)
+}
+
+func printSearchableFields(searchableFieldsMap map[string]bool) {
+	for searchableField, _ := range searchableFieldsMap{
+		fmt.Println(searchableField)
+	}
 }

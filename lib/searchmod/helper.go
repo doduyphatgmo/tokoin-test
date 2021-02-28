@@ -62,7 +62,7 @@ func printOrgResult(orgResultList []orgResult) {
 	}
 	fmt.Println("\nResult:")
 	for i, orgResult := range orgResultList {
-		fmt.Println(fmt.Sprintf("Organization %v:", i + 1))
+		fmt.Println(fmt.Sprintf("Organization %v:", i+1))
 		printDisplayModel(orgResult.Org)
 		printUsername(orgResult.UserList)
 		printTicketSubject(orgResult.TicketList)
@@ -94,7 +94,7 @@ func printDisplayModel(model interface{}) {
 func printUsername(userList []models.User) {
 	for index, user := range userList {
 		userNumber := fmt.Sprintf("user_%v", index)
-		length := strings.Repeat(" ", 50-len(userNumber))
+		length := strings.Repeat(" ", meta.DisplaySpaceLength-len(userNumber))
 		user := fmt.Sprintf("%v%v%v", userNumber, length, user.Name)
 		fmt.Printf(user + "\n")
 	}
@@ -103,7 +103,7 @@ func printUsername(userList []models.User) {
 func printTicketSubject(ticketList []models.Ticket) {
 	for index, ticket := range ticketList {
 		ticketNumber := fmt.Sprintf("ticket_%v", index)
-		length := strings.Repeat(" ", 50-len(ticketNumber))
+		length := strings.Repeat(" ", meta.DisplaySpaceLength-len(ticketNumber))
 		ticket := fmt.Sprintf("%v%v%v", ticketNumber, length, ticket.Subject)
 		fmt.Printf(ticket + "\n")
 	}
