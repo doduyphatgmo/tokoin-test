@@ -7,8 +7,14 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/models"
 )
 
+type userResult struct {
+	User models.User
+}
+
 var userList []models.User
 var userByOrgIdMap = make(map[uint64][]models.User)
+
+var searchableUserFieldMap = make(map[string]bool)
 
 func initUserList() {
 	err := utils.ReadJsonFile(pathDataUsers, &userList)
@@ -16,6 +22,7 @@ func initUserList() {
 		fmt.Println(err)
 	}
 	mapUserData()
+	convertSearchableListToMap(models.SearchableUserFieldList, searchableUserFieldMap)
 }
 
 func mapUserData()  {
@@ -23,3 +30,7 @@ func mapUserData()  {
 		userByOrgIdMap[user.OrgID] = append(userByOrgIdMap[user.OrgID], user)
 	}
 }
+
+//func searchUser() {
+//
+//}

@@ -37,26 +37,26 @@ const (
 	TicketFieldHasIncidents = "has_incidents"
 	TicketFieldDueAt        = "due_at"
 	TicketFieldVia          = "via"
-	TicketFieldRequestID    = "request_id"
+	TicketFieldRequesterID    = "requester_id"
 )
 
-var SearchableTicketFieldsMap = map[string]bool{
-	TicketFieldID:           true,
-	TicketFieldURL:          true,
-	TicketFieldExternalID:   true,
-	TicketFieldCreatedAt:    true,
-	TicketFieldType:         true,
-	TicketFieldSubject:      true,
-	TicketFieldDescription:  true,
-	TicketFieldPriority:     true,
-	TicketFieldStatus:       true,
-	TicketFieldRecipient:    true,
-	TicketFieldSubmitterId:  true,
-	TicketFieldAssigneeId:   true,
-	TicketFieldOrgID:        true,
-	TicketFieldTags:         true,
-	TicketFieldHasIncidents: true,
-	TicketFieldDueAt:        true,
-	TicketFieldVia:          true,
-	TicketFieldRequestID:    true,
+var SearchableTicketFieldList = []string{
+	TicketFieldID,
+	TicketFieldURL,
+	TicketFieldExternalID,
+	TicketFieldCreatedAt,
+	TicketFieldType,
+	TicketFieldSubject,
+	TicketFieldDescription,
+	TicketFieldPriority,
+	TicketFieldStatus,
+	TicketFieldRecipient,
+	TicketFieldSubmitterId,
+	TicketFieldAssigneeId,
+	TicketFieldOrgID,
+	TicketFieldTags,
+	TicketFieldHasIncidents,
+	TicketFieldDueAt,
+	TicketFieldVia,
+	TicketFieldRequesterID,
 }

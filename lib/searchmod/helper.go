@@ -108,3 +108,21 @@ func printTicketSubject(ticketList []models.Ticket) {
 		fmt.Printf(ticket + "\n")
 	}
 }
+
+func printSearchableFieldList(searchableFieldList []string) {
+	for _, searchableField := range searchableFieldList{
+		fmt.Println(searchableField)
+	}
+	fmt.Println("")
+}
+
+func convertSearchableListToMap(searchableList []string, searchableMap map[string]bool) {
+	for _, searchableField := range searchableList {
+		searchableMap[searchableField] = true
+	}
+}
+
+func printSearchableTitle(item string) {
+	fmt.Println(strings.Repeat("-", meta.DisplayDashLength))
+	fmt.Println(fmt.Sprintf("Search %v with", item))
+}

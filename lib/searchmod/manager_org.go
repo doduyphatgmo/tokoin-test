@@ -30,12 +30,15 @@ var (
 	orgByTagMap           = make(map[string][]models.Organization)
 )
 
+var searchableOrgFieldMap = make(map[string]bool)
+
 func initOrgList() {
 	err := utils.ReadJsonFile(pathDataOrganizations, &orgList)
 	if err != nil {
 		fmt.Println(err)
 	}
 	mapOrgData()
+	convertSearchableListToMap(models.SearchableOrgFieldList, searchableOrgFieldMap)
 }
 
 func mapOrgData() {
@@ -65,7 +68,7 @@ func mapOrgByTag(org models.Organization) {
 }
 
 func searchOrg(searchEntry meta.SearchEntry) (orgResultList []orgResult, err error) {
-	if !models.SearchableOrgFieldsMap[searchEntry.Field] {
+	if !searchableOrgFieldMap[searchEntry.Field] {
 		return nil, errors.New("invalid term, please try again")
 	}
 	var orgList []models.Organization

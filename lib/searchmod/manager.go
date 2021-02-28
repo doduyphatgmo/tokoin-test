@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"strings"
 
 	"github.com/doduyphatgmo/tokoin-test/lib/meta"
 	"github.com/doduyphatgmo/tokoin-test/lib/utils"
@@ -59,12 +58,14 @@ func executeOptionSearch() error {
 			}
 			printOrgResult(orgResultList)
 			break
-			//case meta.ItemUsers:
-			//	searchEntry, err := GetSearchEntry()
-			//	if err != nil {
-			//		return err
-			//	}
-			//	break
+			case meta.ItemUsers:
+				//orgResultList, err := searchUser(searchEntry)
+				//if err != nil {
+				//	fmt.Println(err)
+				//	break
+				//}
+				//printOrgResult(orgResultList)
+				break
 			//case meta.ItemTickets:
 			//	searchEntry, err := GetSearchEntry()
 			//	if err != nil {
@@ -81,21 +82,12 @@ func executeOptionSearch() error {
 }
 
 func viewSearchableFields() {
-	fmt.Println(strings.Repeat("-", meta.DisplaySpaceLength))
-	fmt.Println("Search Users with")
-	printSearchableFields(models.SearchableUserFieldsMap)
+	printSearchableTitle(TitleItemUsers)
+	printSearchableFieldList(models.SearchableUserFieldList)
 
-	fmt.Println(strings.Repeat("-", meta.DisplaySpaceLength))
-	fmt.Println("Search Tickets with")
-	printSearchableFields(models.SearchableTicketFieldsMap)
+	printSearchableTitle(TitleItemTickets)
+	printSearchableFieldList(models.SearchableTicketFieldList)
 
-	fmt.Println(strings.Repeat("-", meta.DisplaySpaceLength))
-	fmt.Println("Search Orgs with")
-	printSearchableFields(models.SearchableOrgFieldsMap)
-}
-
-func printSearchableFields(searchableFieldsMap map[string]bool) {
-	for searchableField, _ := range searchableFieldsMap{
-		fmt.Println(searchableField)
-	}
+	printSearchableTitle(TitleItemOrgs)
+	printSearchableFieldList(models.SearchableOrgFieldList)
 }

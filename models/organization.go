@@ -24,14 +24,14 @@ const (
 	OrgFieldTags          = "tags"
 )
 
-var SearchableOrgFieldsMap = map[string]bool{
-	OrgFieldID:            true,
-	OrgFieldURL:           true,
-	OrgFieldExternalID:    true,
-	OrgFieldName:          true,
-	OrgFieldDomainNames:   true,
-	OrgFieldCreatedAt:     true,
-	OrgFieldDetails:       true,
-	OrgFieldSharedTickets: true,
-	OrgFieldTags:          true,
+var SearchableOrgFieldList = []string{
+	OrgFieldID,
+	OrgFieldURL,
+	OrgFieldExternalID,
+	OrgFieldName,
+	OrgFieldDomainNames,
+	OrgFieldCreatedAt,
+	OrgFieldDetails,
+	OrgFieldSharedTickets,
+	OrgFieldTags,
 }

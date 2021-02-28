@@ -6,6 +6,12 @@ const (
 	pathDataTickets       = "data/tickets.json"
 )
 
+const (
+	TitleItemUsers   = "Users"
+	TitleItemTickets = "Tickets"
+	TitleItemOrgs    = "Organizations"
+)
+
 func init() {
 	initOrgList()
 	initUserList()

@@ -10,12 +10,15 @@ import (
 var ticketList []models.Ticket
 var ticketByOrgIdMap = make(map[uint64][]models.Ticket)
 
+var searchableTicketFieldMap = make(map[string]bool)
+
 func initTicketList() {
 	err := utils.ReadJsonFile(pathDataTickets, &ticketList)
 	if err != nil {
 		fmt.Println(err)
 	}
 	mapTicketData()
+	convertSearchableListToMap(models.SearchableTicketFieldList, searchableTicketFieldMap)
 }
 
 func mapTicketData()  {
