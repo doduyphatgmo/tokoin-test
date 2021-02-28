@@ -34,7 +34,7 @@ const (
 	UserFieldShared      = "shared"
 	UserFieldLocale      = "locale"
 	UserFieldTimezone    = "timezone"
-	UserFieldLastLogicAt = "last_login_at"
+	UserFieldLastLoginAt = "last_login_at"
 	UserFieldEmail       = "email"
 	UserFieldPhone       = "phone"
 	UserFieldSignature   = "signature"
@@ -56,7 +56,7 @@ var SearchableUserFieldList = []string{
 	UserFieldShared,
 	UserFieldLocale,
 	UserFieldTimezone,
-	UserFieldLastLogicAt,
+	UserFieldLastLoginAt,
 	UserFieldEmail,
 	UserFieldPhone,
 	UserFieldSignature,
@@ -65,3 +65,9 @@ var SearchableUserFieldList = []string{
 	UserFieldSuspended,
 	UserFieldRole,
 }
+
+//var UserFieldBoolMap = map[string]bool{
+//	UserFieldActive:   true,
+//	UserFieldVerified: true,
+//	UserFieldShared:   true,
+//}

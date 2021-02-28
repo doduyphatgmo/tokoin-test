@@ -21,7 +21,7 @@ var orgList []models.Organization
 var (
 	orgByIdMap            = make(map[uint64]models.Organization)
 	orgByUrlMap           = make(map[string][]models.Organization)
-	orgByExternalIdMap    = make(map[string][]models.Organization)
+	orgByExternalIdMap    = make(map[string]models.Organization)
 	orgByNameMap          = make(map[string][]models.Organization)
 	orgByDomainNameMap    = make(map[string][]models.Organization)
 	orgByCreatedAtMap     = make(map[string][]models.Organization)
@@ -38,14 +38,14 @@ func initOrgList() {
 		fmt.Println(err)
 	}
 	mapOrgData()
-	convertSearchableListToMap(models.SearchableOrgFieldList, searchableOrgFieldMap)
+	utils.ConvertStrListToMap(models.SearchableOrgFieldList, searchableOrgFieldMap)
 }
 
 func mapOrgData() {
 	for _, org := range orgList {
 		orgByIdMap[org.ID] = org
 		orgByUrlMap[org.URL] = append(orgByUrlMap[org.URL], org)
-		orgByExternalIdMap[org.ExternalID] = append(orgByExternalIdMap[org.ExternalID], org)
+		orgByExternalIdMap[org.ExternalID] = org
 		orgByNameMap[org.Name] = append(orgByNameMap[org.Name], org)
 		mapOrgByDomainName(org)
 		orgByCreatedAtMap[org.CreatedAt] = append(orgByNameMap[org.CreatedAt], org)
@@ -86,7 +86,9 @@ func searchOrg(searchEntry meta.SearchEntry) (orgResultList []orgResult, err err
 		orgList = orgByUrlMap[searchEntry.Value]
 		break
 	case models.OrgFieldExternalID:
-		orgList = orgByExternalIdMap[searchEntry.Value]
+		if org, ok := orgByExternalIdMap[searchEntry.Value]; ok {
+			orgList = append(orgList, org)
+		}
 		break
 	case models.OrgFieldName:
 		orgList = orgByNameMap[searchEntry.Value]

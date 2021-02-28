@@ -109,12 +109,6 @@ func printSearchableFieldList(searchableFieldList []string) {
 	fmt.Println("")
 }
 
-func convertSearchableListToMap(searchableList []string, searchableMap map[string]bool) {
-	for _, searchableField := range searchableList {
-		searchableMap[searchableField] = true
-	}
-}
-
 func printSearchableTitle(item string) {
 	fmt.Println(strings.Repeat("-", meta.DisplayDashLength))
 	fmt.Println(fmt.Sprintf("Search %v with", item))

@@ -23,7 +23,7 @@ func initTicketList() {
 		fmt.Println(err)
 	}
 	mapTicketData()
-	convertSearchableListToMap(models.SearchableTicketFieldList, searchableTicketFieldMap)
+	utils.ConvertStrListToMap(models.SearchableTicketFieldList, searchableTicketFieldMap)
 }
 
 func mapTicketData() {
