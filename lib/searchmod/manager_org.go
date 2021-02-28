@@ -118,8 +118,7 @@ func searchOrg(searchEntry meta.SearchEntry) (orgResultList []orgResult, err err
 	return orgResultList, nil
 }
 
-func transformOrgList(orgList []models.Organization) []orgResult {
-	var orgResultList []orgResult
+func transformOrgList(orgList []models.Organization) (orgResultList []orgResult) {
 	for _, org := range orgList {
 		var orgResult orgResult
 		orgResult.Org = org
@@ -128,4 +127,17 @@ func transformOrgList(orgList []models.Organization) []orgResult {
 		orgResultList = append(orgResultList, orgResult)
 	}
 	return orgResultList
+}
+
+func printOrgResult(orgResultList []orgResult) {
+	if len(orgResultList) == 0 {
+		fmt.Println(meta.SearchNoResult)
+	}
+	fmt.Println("")
+	for i, orgResult := range orgResultList {
+		fmt.Println(fmt.Sprintf("Organization %v:", i+1))
+		printDisplayModel(orgResult.Org)
+		printUsername(orgResult.UserList)
+		printTicketSubject(orgResult.TicketList, DisplayKeyTicket)
+	}
 }

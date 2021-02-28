@@ -56,19 +56,6 @@ func isRetrySearching() (bool, error) {
 	return input == meta.RetrySearchingInput, nil
 }
 
-func printOrgResult(orgResultList []orgResult) {
-	if len(orgResultList) == 0 {
-		fmt.Println(meta.SearchNoResult)
-	}
-	fmt.Println("\nResult:")
-	for i, orgResult := range orgResultList {
-		fmt.Println(fmt.Sprintf("Organization %v:", i+1))
-		printDisplayModel(orgResult.Org)
-		printUsername(orgResult.UserList)
-		printTicketSubject(orgResult.TicketList)
-	}
-}
-
 func printDisplayModel(model interface{}) {
 	modelValue := reflect.ValueOf(model)
 	if modelValue.Kind() != reflect.Struct {
@@ -100,17 +87,23 @@ func printUsername(userList []models.User) {
 	}
 }
 
-func printTicketSubject(ticketList []models.Ticket) {
+func printTicketSubject(ticketList []models.Ticket, displayKey string) {
 	for index, ticket := range ticketList {
-		ticketNumber := fmt.Sprintf("ticket_%v", index)
+		ticketNumber := fmt.Sprintf("%v_%v", displayKey, index)
 		length := strings.Repeat(" ", meta.DisplaySpaceLength-len(ticketNumber))
 		ticket := fmt.Sprintf("%v%v%v", ticketNumber, length, ticket.Subject)
 		fmt.Printf(ticket + "\n")
 	}
 }
 
+func printOrgName(org models.Organization) {
+	length := strings.Repeat(" ", meta.DisplaySpaceLength-len(DisplayKeyOrgName))
+	orgName := fmt.Sprintf("%v%v%v", DisplayKeyOrgName, length, org.Name)
+	fmt.Printf(orgName + "\n")
+}
+
 func printSearchableFieldList(searchableFieldList []string) {
-	for _, searchableField := range searchableFieldList{
+	for _, searchableField := range searchableFieldList {
 		fmt.Println(searchableField)
 	}
 	fmt.Println("")

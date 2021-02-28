@@ -8,7 +8,12 @@ import (
 )
 
 var ticketList []models.Ticket
-var ticketByOrgIdMap = make(map[uint64][]models.Ticket)
+
+var (
+	ticketByOrgIdMap       = make(map[uint64][]models.Ticket)
+	ticketByAssigneeIdMap  = make(map[uint64][]models.Ticket)
+	ticketBySubmitterIdMap = make(map[uint64][]models.Ticket)
+)
 
 var searchableTicketFieldMap = make(map[string]bool)
 
@@ -21,8 +26,10 @@ func initTicketList() {
 	convertSearchableListToMap(models.SearchableTicketFieldList, searchableTicketFieldMap)
 }
 
-func mapTicketData()  {
+func mapTicketData() {
 	for _, ticket := range ticketList {
 		ticketByOrgIdMap[ticket.OrgID] = append(ticketByOrgIdMap[ticket.OrgID], ticket)
+		ticketByAssigneeIdMap[ticket.AssigneeId] = append(ticketByAssigneeIdMap[ticket.AssigneeId], ticket)
+		ticketBySubmitterIdMap[ticket.SubmitterId] = append(ticketBySubmitterIdMap[ticket.SubmitterId], ticket)
 	}
 }

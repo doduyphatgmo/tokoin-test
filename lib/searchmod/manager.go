@@ -59,12 +59,12 @@ func executeOptionSearch() error {
 			printOrgResult(orgResultList)
 			break
 			case meta.ItemUsers:
-				//orgResultList, err := searchUser(searchEntry)
-				//if err != nil {
-				//	fmt.Println(err)
-				//	break
-				//}
-				//printOrgResult(orgResultList)
+				orgResultList, err := searchUser(searchEntry)
+				if err != nil {
+					fmt.Println(err)
+					break
+				}
+				printUserResult(orgResultList)
 				break
 			//case meta.ItemTickets:
 			//	searchEntry, err := GetSearchEntry()
