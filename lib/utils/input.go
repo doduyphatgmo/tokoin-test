@@ -2,8 +2,11 @@ package utils
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
+
+	"github.com/doduyphatgmo/tokoin-test/lib/meta"
 )
 
 func GetConsoleInput() (string, error) {
@@ -13,13 +16,8 @@ func GetConsoleInput() (string, error) {
 		return "", err
 	}
 	input = strings.TrimSpace(input)
+	if input == meta.QuitInput {
+		panic(fmt.Sprintf("\n%v", "Exit application"))
+	}
 	return input, nil
-	//scanner := bufio.NewScanner(os.Stdin)
-	//for scanner.Scan() {
-	//	fmt.Println( )
-	//}
-	//if scanner.Err() != nil {
-	//	return nil, scanner.Err()
-	//}
-	//return scanner, nil
 }

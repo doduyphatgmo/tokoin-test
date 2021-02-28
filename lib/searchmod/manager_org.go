@@ -3,6 +3,7 @@ package searchmod
 import (
 	"errors"
 	"fmt"
+	"strconv"
 
 	"github.com/doduyphatgmo/tokoin-test/lib/meta"
 	"github.com/doduyphatgmo/tokoin-test/lib/utils"
@@ -18,9 +19,15 @@ type orgResult struct {
 var orgList []models.Organization
 
 var (
-	orgByIdMap         = make(map[uint64]models.Organization)
-	orgByUrlMap        = make(map[string][]models.Organization)
-	orgByExternalIdMap = make(map[string][]models.Organization)
+	orgByIdMap            = make(map[uint64]models.Organization)
+	orgByUrlMap           = make(map[string][]models.Organization)
+	orgByExternalIdMap    = make(map[string][]models.Organization)
+	orgByNameMap          = make(map[string][]models.Organization)
+	orgByDomainNameMap    = make(map[string][]models.Organization)
+	orgByCreatedAtMap     = make(map[string][]models.Organization)
+	orgByDetailsMap       = make(map[string][]models.Organization)
+	orgBySharedTicketsMap = make(map[bool][]models.Organization)
+	orgByTagMap           = make(map[string][]models.Organization)
 )
 
 func initOrgList() {
@@ -36,12 +43,30 @@ func mapOrgData() {
 		orgByIdMap[org.ID] = org
 		orgByUrlMap[org.URL] = append(orgByUrlMap[org.URL], org)
 		orgByExternalIdMap[org.ExternalID] = append(orgByExternalIdMap[org.ExternalID], org)
+		orgByNameMap[org.Name] = append(orgByNameMap[org.Name], org)
+		mapOrgByDomainName(org)
+		orgByCreatedAtMap[org.CreatedAt] = append(orgByNameMap[org.CreatedAt], org)
+		orgByDetailsMap[org.Details] = append(orgByDetailsMap[org.Details], org)
+		orgBySharedTicketsMap[org.SharedTickets] = append(orgBySharedTicketsMap[org.SharedTickets], org)
+		mapOrgByTag(org)
+	}
+}
+
+func mapOrgByDomainName(org models.Organization) {
+	for _, domainName := range org.DomainNames {
+		orgByDomainNameMap[domainName] = append(orgByDomainNameMap[domainName], org)
+	}
+}
+
+func mapOrgByTag(org models.Organization) {
+	for _, tag := range org.Tags {
+		orgByTagMap[tag] = append(orgByTagMap[tag], org)
 	}
 }
 
 func searchOrg(searchEntry meta.SearchEntry) (orgResultList []orgResult, err error) {
 	if !models.SearchableOrgFieldsMap[searchEntry.Field] {
-		return nil, errors.New("wrong field, try again")
+		return nil, errors.New("invalid term, please try again")
 	}
 	var orgList []models.Organization
 	switch searchEntry.Field {
@@ -59,6 +84,28 @@ func searchOrg(searchEntry meta.SearchEntry) (orgResultList []orgResult, err err
 		break
 	case models.OrgFieldExternalID:
 		orgList = orgByExternalIdMap[searchEntry.Value]
+		break
+	case models.OrgFieldName:
+		orgList = orgByNameMap[searchEntry.Value]
+		break
+	case models.OrgFieldDomainNames:
+		orgList = orgByDomainNameMap[searchEntry.Value]
+		break
+	case models.OrgFieldCreatedAt:
+		orgList = orgByCreatedAtMap[searchEntry.Value]
+		break
+	case models.OrgFieldDetails:
+		orgList = orgByDetailsMap[searchEntry.Value]
+		break
+	case models.OrgFieldSharedTickets:
+		orgSharedTicket, err := strconv.ParseBool(searchEntry.Value)
+		if err != nil {
+			return nil, err
+		}
+		orgList = orgBySharedTicketsMap[orgSharedTicket]
+		break
+	case models.OrgFieldTags:
+		orgList = orgByTagMap[searchEntry.Value]
 		break
 	}
 

@@ -9,15 +9,16 @@ import (
 )
 
 func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println(r)
+		}
+	}()
 	for {
 		fmt.Print(meta.MsgSearchOptions)
 		selectedOptionStr, err := utils.GetConsoleInput()
 		if err != nil {
 			fmt.Printf("Error has occurred: %v\n", err)
-		}
-		if selectedOptionStr == meta.OptionQuit {
-			fmt.Println("stoppppppp")
-			break
 		}
 		err = searchmod.ExecuteSelectedOption(selectedOptionStr)
 		if err != nil {

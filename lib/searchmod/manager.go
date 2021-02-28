@@ -22,7 +22,7 @@ func ExecuteSelectedOption(optionStr string) error {
 		}
 		break
 	case meta.OptionViewFields:
-		//viewListFields()
+		viewSearchableFields()
 		break
 	default:
 		return errors.New("wrong option. try again")
@@ -41,32 +41,43 @@ func executeOptionSearch() error {
 		return err
 	}
 
-	searchEntry, err := GetSearchEntry()
-	if err != nil {
-		return err
-	}
+	isRetry := true
+	for isRetry {
+		searchEntry, err := getSearchEntry()
+			if err != nil {
+				return err
+			}
 
-	switch inputItem {
-	case meta.ItemOrganizations:
-		orgResultList, err := searchOrg(searchEntry)
+		switch inputItem {
+		case meta.ItemOrganizations:
+			orgResultList, err := searchOrg(searchEntry)
+			if err != nil {
+				fmt.Println(err)
+				break
+			}
+			printOrgResult(orgResultList)
+			break
+			//case meta.ItemUsers:
+			//	searchEntry, err := GetSearchEntry()
+			//	if err != nil {
+			//		return err
+			//	}
+			//	break
+			//case meta.ItemTickets:
+			//	searchEntry, err := GetSearchEntry()
+			//	if err != nil {
+			//		return err
+			//	}
+			//	break
+		}
+		isRetry, err = isRetrySearching()
 		if err != nil {
 			return err
 		}
-		printOrgResult(orgResultList)
-		break
-	//case meta.ItemUsers:
-	//	searchEntry, err := GetSearchEntry()
-	//	if err != nil {
-	//		return err
-	//	}
-	//	break
-	//case meta.ItemTickets:
-	//	searchEntry, err := GetSearchEntry()
-	//	if err != nil {
-	//		return err
-	//	}
-	//	break
 	}
 	return nil
 }
 
+func viewSearchableFields() {
+
+}

@@ -3,6 +3,7 @@ package searchmod
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 
 	"github.com/doduyphatgmo/tokoin-test/lib/meta"
@@ -10,7 +11,7 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/models"
 )
 
-func GetSearchEntry() (searchEntry meta.SearchEntry, err error) {
+func getSearchEntry() (searchEntry meta.SearchEntry, err error) {
 	field, err := getSearchField()
 	if err != nil {
 		return
@@ -42,11 +43,26 @@ func getSearchValue() (string, error) {
 	return inputValue, nil
 }
 
+func isRetrySearching() (bool, error) {
+	fmt.Println(meta.MsgRetrySearching)
+	inputStr, err := utils.GetConsoleInput()
+	if err != nil {
+		return false, err
+	}
+	input, err := strconv.Atoi(inputStr)
+	if err != nil {
+		return false, err
+	}
+	return input == meta.RetrySearchingInput, nil
+}
+
 func printOrgResult(orgResultList []orgResult) {
 	if len(orgResultList) == 0 {
 		fmt.Println(meta.SearchNoResult)
 	}
-	for _, orgResult := range orgResultList {
+	fmt.Println("\nResult:")
+	for i, orgResult := range orgResultList {
+		fmt.Println(fmt.Sprintf("Organization %v:", i + 1))
 		printDisplayModel(orgResult.Org)
 		printUsername(orgResult.UserList)
 		printTicketSubject(orgResult.TicketList)
@@ -77,18 +93,18 @@ func printDisplayModel(model interface{}) {
 
 func printUsername(userList []models.User) {
 	for index, user := range userList {
-		key2 := fmt.Sprintf("user_%v", index)
-		length := strings.Repeat(" ", 50-len(key2))
-		s2 := fmt.Sprintf("%v%v%v", key2, length, user.Name)
-		fmt.Printf(s2 + "\n")
+		userNumber := fmt.Sprintf("user_%v", index)
+		length := strings.Repeat(" ", 50-len(userNumber))
+		user := fmt.Sprintf("%v%v%v", userNumber, length, user.Name)
+		fmt.Printf(user + "\n")
 	}
 }
 
 func printTicketSubject(ticketList []models.Ticket) {
 	for index, ticket := range ticketList {
-		key2 := fmt.Sprintf("ticket_%v", index)
-		length := strings.Repeat(" ", 50-len(key2))
-		s2 := fmt.Sprintf("%v%v%v", key2, length, ticket.Subject)
-		fmt.Printf(s2 + "\n")
+		ticketNumber := fmt.Sprintf("ticket_%v", index)
+		length := strings.Repeat(" ", 50-len(ticketNumber))
+		ticket := fmt.Sprintf("%v%v%v", ticketNumber, length, ticket.Subject)
+		fmt.Printf(ticket + "\n")
 	}
 }

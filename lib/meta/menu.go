@@ -18,8 +18,9 @@ Type 'quit' to exit at anytime. Press 'Enter' to continue
 const (
 	OptionSearch     = 1
 	OptionViewFields = 2
-	OptionQuit       = "quit"
 )
+
+const QuitInput = "quit"
 
 const (
 	ItemUsers         = 1
@@ -30,3 +31,7 @@ const (
 const SearchNoResult = "No results found"
 
 const DisplaySpaceLength = 50
+
+const MsgRetrySearching = "\nPress 1 to retry searching, the other number to back to menu"
+
+const RetrySearchingInput = 1
