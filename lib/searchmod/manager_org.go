@@ -67,7 +67,7 @@ func mapOrgByTag(org models.Organization) {
 	}
 }
 
-func searchOrg(searchEntry meta.SearchEntry) (orgResultList []orgResult, err error) {
+func searchOrgs(searchEntry meta.SearchEntry) (orgResultList []orgResult, err error) {
 	if !searchableOrgFieldMap[searchEntry.Field] {
 		return nil, errors.New("invalid term, please try again")
 	}
@@ -139,7 +139,7 @@ func printOrgResult(orgResultList []orgResult) {
 	for i, orgResult := range orgResultList {
 		fmt.Println(fmt.Sprintf("Organization %v:", i+1))
 		printDisplayModel(orgResult.Org)
-		printUsername(orgResult.UserList)
+		printUserNameInList(orgResult.UserList)
 		printTicketSubject(orgResult.TicketList, DisplayKeyTicket)
 	}
 }

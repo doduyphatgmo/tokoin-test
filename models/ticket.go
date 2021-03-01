@@ -29,15 +29,13 @@ const (
 	TicketFieldDescription  = "description"
 	TicketFieldPriority     = "priority"
 	TicketFieldStatus       = "status"
-	TicketFieldRecipient    = "recipient"
-	TicketFieldSubmitterId  = "submitter_id"
-	TicketFieldAssigneeId   = "assignee_id"
+	TicketFieldSubmitterID  = "submitter_id"
+	TicketFieldAssigneeID   = "assignee_id"
 	TicketFieldOrgID        = "organization_id"
 	TicketFieldTags         = "tags"
 	TicketFieldHasIncidents = "has_incidents"
 	TicketFieldDueAt        = "due_at"
 	TicketFieldVia          = "via"
-	TicketFieldRequesterID    = "requester_id"
 )
 
 var SearchableTicketFieldList = []string{
@@ -50,13 +48,11 @@ var SearchableTicketFieldList = []string{
 	TicketFieldDescription,
 	TicketFieldPriority,
 	TicketFieldStatus,
-	TicketFieldRecipient,
-	TicketFieldSubmitterId,
-	TicketFieldAssigneeId,
+	TicketFieldSubmitterID,
+	TicketFieldAssigneeID,
 	TicketFieldOrgID,
 	TicketFieldTags,
 	TicketFieldHasIncidents,
 	TicketFieldDueAt,
 	TicketFieldVia,
-	TicketFieldRequesterID,
 }

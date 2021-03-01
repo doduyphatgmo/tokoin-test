@@ -17,6 +17,8 @@ const (
 	DisplayKeyAssigneeTicket  = "assignee_ticket"
 	DisplayKeySubmittedTicket = "submitted_ticket"
 	DisplayKeyOrgName         = "organization_name"
+	DisplayKeyAssigneeName    = "assignee_name"
+	DisplayKeySubmitterName   = "submitter_name"
 )
 
 func init() {

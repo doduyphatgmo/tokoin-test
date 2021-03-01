@@ -78,7 +78,7 @@ func printDisplayModel(model interface{}) {
 	}
 }
 
-func printUsername(userList []models.User) {
+func printUserNameInList(userList []models.User) {
 	for index, user := range userList {
 		userNumber := fmt.Sprintf("user_%v", index)
 		length := strings.Repeat(" ", meta.DisplaySpaceLength-len(userNumber))
@@ -100,6 +100,12 @@ func printOrgName(org models.Organization) {
 	length := strings.Repeat(" ", meta.DisplaySpaceLength-len(DisplayKeyOrgName))
 	orgName := fmt.Sprintf("%v%v%v", DisplayKeyOrgName, length, org.Name)
 	fmt.Printf(orgName + "\n")
+}
+
+func printUserName(user models.User, displayKey string) {
+	length := strings.Repeat(" ", meta.DisplaySpaceLength-len(displayKey))
+	userName := fmt.Sprintf("%v%v%v", displayKey, length, user.Name)
+	fmt.Printf(userName + "\n")
 }
 
 func printSearchableFieldList(searchableFieldList []string) {

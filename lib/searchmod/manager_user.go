@@ -82,7 +82,7 @@ func mapUserByTag(user models.User) {
 	}
 }
 
-func searchUser(searchEntry meta.SearchEntry) (userResultList []userResult, err error) {
+func searchUsers(searchEntry meta.SearchEntry) (userResultList []userResult, err error) {
 	if !searchableUserFieldMap[searchEntry.Field] {
 		return nil, errors.New("invalid term, please try again")
 	}

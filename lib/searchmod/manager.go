@@ -45,33 +45,34 @@ func executeOptionSearch() error {
 	isRetry := true
 	for isRetry {
 		searchEntry, err := getSearchEntry()
-			if err != nil {
-				return err
-			}
+		if err != nil {
+			return err
+		}
 
 		switch inputItem {
 		case meta.ItemOrganizations:
-			orgResultList, err := searchOrg(searchEntry)
+			orgResultList, err := searchOrgs(searchEntry)
 			if err != nil {
 				fmt.Println(err)
 				break
 			}
 			printOrgResult(orgResultList)
 			break
-			case meta.ItemUsers:
-				orgResultList, err := searchUser(searchEntry)
-				if err != nil {
-					fmt.Println(err)
-					break
-				}
-				printUserResult(orgResultList)
+		case meta.ItemUsers:
+			userResultList, err := searchUsers(searchEntry)
+			if err != nil {
+				fmt.Println(err)
 				break
-			//case meta.ItemTickets:
-			//	searchEntry, err := GetSearchEntry()
-			//	if err != nil {
-			//		return err
-			//	}
-			//	break
+			}
+			printUserResult(userResultList)
+			break
+		case meta.ItemTickets:
+			ticketResultList, err := searchTickets(searchEntry)
+			if err != nil {
+				return err
+			}
+			printTicketResult(ticketResultList)
+			break
 		}
 		isRetry, err = isRetrySearching()
 		if err != nil {
