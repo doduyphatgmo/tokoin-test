@@ -10,7 +10,7 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/models"
 )
 
-type orgResult struct {
+type OrgResult struct {
 	Org        models.Organization `json:"org"`
 	UserList   []models.User       `json:"user_list"`
 	TicketList []models.Ticket     `json:"ticket_list"`
@@ -67,7 +67,7 @@ func mapOrgByTag(org models.Organization) {
 	}
 }
 
-func searchOrgs(searchEntry meta.SearchEntry) (orgResultList []orgResult, err error) {
+func SearchOrgs(searchEntry meta.SearchEntry) (orgResultList []OrgResult, err error) {
 	if !searchableOrgFieldMap[searchEntry.Field] {
 		return nil, errors.New("invalid term, please try again")
 	}
@@ -120,9 +120,9 @@ func searchOrgs(searchEntry meta.SearchEntry) (orgResultList []orgResult, err er
 	return orgResultList, nil
 }
 
-func transformOrgList(orgList []models.Organization) (orgResultList []orgResult) {
+func transformOrgList(orgList []models.Organization) (orgResultList []OrgResult) {
 	for _, org := range orgList {
-		var orgResult orgResult
+		var orgResult OrgResult
 		orgResult.Org = org
 		orgResult.UserList = userByOrgIdMap[org.ID]
 		orgResult.TicketList = ticketByOrgIdMap[org.ID]
@@ -131,7 +131,7 @@ func transformOrgList(orgList []models.Organization) (orgResultList []orgResult)
 	return orgResultList
 }
 
-func printOrgResult(orgResultList []orgResult) {
+func printOrgResult(orgResultList []OrgResult) {
 	if len(orgResultList) == 0 {
 		fmt.Println(meta.SearchNoResult)
 	}

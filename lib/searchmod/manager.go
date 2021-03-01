@@ -51,7 +51,7 @@ func executeOptionSearch() error {
 
 		switch inputItem {
 		case meta.ItemOrganizations:
-			orgResultList, err := searchOrgs(searchEntry)
+			orgResultList, err := SearchOrgs(searchEntry)
 			if err != nil {
 				fmt.Println(err)
 				break
@@ -59,7 +59,7 @@ func executeOptionSearch() error {
 			printOrgResult(orgResultList)
 			break
 		case meta.ItemUsers:
-			userResultList, err := searchUsers(searchEntry)
+			userResultList, err := SearchUsers(searchEntry)
 			if err != nil {
 				fmt.Println(err)
 				break
@@ -67,7 +67,7 @@ func executeOptionSearch() error {
 			printUserResult(userResultList)
 			break
 		case meta.ItemTickets:
-			ticketResultList, err := searchTickets(searchEntry)
+			ticketResultList, err := SearchTickets(searchEntry)
 			if err != nil {
 				return err
 			}

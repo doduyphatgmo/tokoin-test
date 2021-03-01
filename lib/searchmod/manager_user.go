@@ -10,7 +10,7 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/models"
 )
 
-type userResult struct {
+type UserResult struct {
 	User                models.User
 	AssigneeTicketList  []models.Ticket
 	SubmittedTicketList []models.Ticket
@@ -82,7 +82,7 @@ func mapUserByTag(user models.User) {
 	}
 }
 
-func searchUsers(searchEntry meta.SearchEntry) (userResultList []userResult, err error) {
+func SearchUsers(searchEntry meta.SearchEntry) (userResultList []UserResult, err error) {
 	if !searchableUserFieldMap[searchEntry.Field] {
 		return nil, errors.New("invalid term, please try again")
 	}
@@ -180,9 +180,9 @@ func searchUsers(searchEntry meta.SearchEntry) (userResultList []userResult, err
 	return userResultList, nil
 }
 
-func transformUserList(userList []models.User) (userResultList []userResult) {
+func transformUserList(userList []models.User) (userResultList []UserResult) {
 	for _, user := range userList {
-		var userResult userResult
+		var userResult UserResult
 		userResult.User = user
 		userResult.AssigneeTicketList = ticketByAssigneeIdMap[user.ID]
 		userResult.SubmittedTicketList = ticketBySubmitterIdMap[user.ID]
@@ -192,7 +192,7 @@ func transformUserList(userList []models.User) (userResultList []userResult) {
 	return userResultList
 }
 
-func printUserResult(userResultList []userResult) {
+func printUserResult(userResultList []UserResult) {
 	if len(userResultList) == 0 {
 		fmt.Println(meta.SearchNoResult)
 	}
