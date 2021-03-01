@@ -8,12 +8,21 @@ import (
 	"github.com/doduyphatgmo/tokoin-test/lib/utils"
 )
 
+const (
+	PathDataOrgs    = "data/organizations.json"
+	PathDataUsers   = "data/users.json"
+	PathDataTickets = "data/tickets.json"
+)
+
 func main() {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println(r)
 		}
 	}()
+	searchmod.InitOrgList(PathDataOrgs)
+	searchmod.InitUserList(PathDataUsers)
+	searchmod.InitTicketList(PathDataTickets)
 	for {
 		fmt.Print(meta.MsgSearchOptions)
 		selectedOptionStr, err := utils.GetConsoleInput()

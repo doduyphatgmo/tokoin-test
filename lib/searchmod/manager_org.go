@@ -32,8 +32,8 @@ var (
 
 var searchableOrgFieldMap = make(map[string]bool)
 
-func initOrgList() {
-	err := utils.ReadJsonFile(pathDataOrganizations, &orgList)
+func InitOrgList(path string) {
+	err := utils.ReadJsonFile(path, &orgList)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -69,7 +69,8 @@ func executeOptionSearch() error {
 		case meta.ItemTickets:
 			ticketResultList, err := SearchTickets(searchEntry)
 			if err != nil {
-				return err
+				fmt.Println(err)
+				break
 			}
 			printTicketResult(ticketResultList)
 			break

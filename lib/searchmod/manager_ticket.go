@@ -40,8 +40,8 @@ var (
 
 var searchableTicketFieldMap = make(map[string]bool)
 
-func initTicketList() {
-	err := utils.ReadJsonFile(pathDataTickets, &ticketList)
+func InitTicketList(path string) {
+	err := utils.ReadJsonFile(path, &ticketList)
 	if err != nil {
 		fmt.Println(err)
 	}

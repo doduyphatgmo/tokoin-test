@@ -43,8 +43,8 @@ var (
 
 var searchableUserFieldMap = make(map[string]bool)
 
-func initUserList() {
-	err := utils.ReadJsonFile(pathDataUsers, &userList)
+func InitUserList(path string) {
+	err := utils.ReadJsonFile(path, &userList)
 	if err != nil {
 		fmt.Println(err)
 	}
