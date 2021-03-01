@@ -25,3 +25,6 @@ $ go run main.go
 ```bash
 $ go test ./test
 ```
+
+# Note
+For user convenience, the fields with array type just need input item in the array 
